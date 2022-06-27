@@ -1,0 +1,74 @@
+.rock {
+  background-color: rgba(148, 81, 81, 0.863);
+}
+.ghost {
+  background-color: rgba(247, 247, 247, 0.863);
+}
+.electric {
+  background-color: rgba(255, 255, 161, 0.863);
+}
+.bug {
+  background-color: rgba(246, 214, 167, 0.863);
+}
+.poison {
+  background-color: rgba(224, 167, 246, 0.863);
+}
+.normal {
+  background-color: rgba(244, 244, 244, 0.863)
+}
+.fairy {
+  background-color: rgba(255, 192, 203, 0.863);
+}
+.fire {
+  background-color: rgba(251, 227, 223, 0.863)
+}
+.grass {
+  background-color:rgba(226, 249, 225, 0.863)
+}
+.water {
+  background-color:rgba(224, 241, 253, 0.863)
+}
+.ground {
+  background-color: rgba(218, 165, 32, 0.863)
+}
+.fighting {
+  background-color: rgba(52, 146, 229, 0.863);
+}
+.psychic {
+  background-color: rgba(229, 247, 129, 0.863)
+}
+
+.thumb-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0 ;
+  margin: 0.3rem;
+  border: 1px solid #efefef;
+  border-radius: 0.2rem;
+  min-width: 260px;
+  text-align: center;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.089);
+  
+}
+h3 {
+  margin-bottom: 0.2rem;
+}
+.thumb-container .number {
+  border-radius: 1rem;
+  padding: 0.2rem 0.4rem;
+  background-color: rgba(255,255,255,0.3);
+}
+.thumb-container img {
+  width: 120px;
+  height: 120px;
+}
+.thumb-container small {
+  text-transform: capitalize;
+}
+.detail-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
