@@ -27,7 +27,7 @@ const PokemonAllDetails = () => {
 
   useEffect(() => {
     fetchDetails();
-  }, []);
+  }, [pokemonName]);
 
   useEffect(() => {
     fetchDetails();

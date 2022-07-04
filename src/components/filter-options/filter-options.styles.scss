@@ -1,0 +1,76 @@
+.filter-container {
+  width: 86%;
+  height: 60vh;
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  justify-content: space-between;
+  font-size: large;
+  background-color: rgba($color: #b4c5db, $alpha: 0.8);
+
+  .type-container {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    .types {
+      display: flex;
+      flex-direction: column;
+      flex-flow: column wrap;
+      align-content: flex-start;
+      justify-content: flex-start;
+      height: 80%
+    }
+  }
+
+  .hp-container {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    .hp-values {
+      display: flex;
+      flex-direction: column;
+      flex-flow: column wrap;
+      align-content: flex-start;
+      justify-content: flex-start;
+      height: 80%
+    }
+  }
+
+  .attack-container {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    .attack-values {
+      display: flex;
+      flex-direction: column;
+      flex-flow: column wrap;
+      align-content: flex-start;
+      justify-content: flex-start;
+      height: 80%
+    }
+  }
+
+  .defense-container {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+    .defense-values {
+      display: flex;
+      flex-direction: column;
+      flex-flow: column wrap;
+      align-content: flex-start;
+      justify-content: flex-start;
+      height: 80%
+    }
+  }
+
+  .reset-button {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+}

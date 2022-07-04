@@ -7,7 +7,6 @@ import './PokemonDetails.styles.scss'
 const PokemonDetails = ({ url }) => {
   const [details, setDetails] = useState(null);
 
-
   const fetchDetails = async () => {
     const response = await axios.get(url);
     if (response.status === 200) {

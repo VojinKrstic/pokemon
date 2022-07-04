@@ -1,54 +1,113 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import {Pagination, Stack} from '@mui/material'
+import { Input } from "@mui/material";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
-
-import PokemonCard from "../pokemon-card/pokemon-card.components";
-
-import './pokemon-preview.styles.scss';
+import "./pokemon-preview.styles.scss";
 import { pokemonsAll } from "../../redux/pokemon/pokemons.slice";
+import axios from "axios";
+import FilterOptions from "../filter-options";
+import PokemonDisplay from "../pokemon-display";
 
+const PokemonPreview = () => {
+  const pokemons = useSelector((state) => state.pokemons);
+  const dispatch = useDispatch();
+  const [searchField, setSearchField] = useState("");
+  const [change, setChange] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [typeFilterPokemons, setTypeFilterPokemons] = useState([]);
+  const [filterChange, setFilterChange] = useState(false);
 
+  const handleClick = () => {
+    setShowFilters(!showFilters);
+  };
 
-const PokemonPreview = () =>{
-  const [offset, setOffset] = useState(0)
-  const pokemons = useSelector(state => state.pokemons)
-  const dispatch = useDispatch()
+  const handleFilterChange = async (type, hp, atk, def) => {
+    if (type !== "") {
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/type/${type}`
+      );
+      if (response.status === 200) {
+        setTypeFilterPokemons(response.data.pokemon);
+        setFilterChange(true);
+      }
+    }
+    if (hp !== 0) {
+      setTypeFilterPokemons(
+        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[0].base_stat > 50)
+      )
+      setFilterChange(true);
+    }
+    if (atk !== 0) {
+      setTypeFilterPokemons(
+        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[1].base_stat > 50)
+      );
+      setFilterChange(true);
+    }
+    if (def !== 0) {
+      setTypeFilterPokemons(
+        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[2].base_stat > 50)
+      );
+      setFilterChange(true);
+    }
+  };
 
-  const handleChange = (event, value) => {
-    value -= 1
-    setOffset(value * 20)
-  }
+  const realTypeFilterPokemons = typeFilterPokemons?.map(
+    (pokemon) => pokemon.pokemon
+  );
+
+  const resetFilter = () => {
+    setFilterChange(false);
+    setShowFilters(false);
+  };
+
+  const handleSearchChange = (event) => {
+    if (event.target.value === "") setChange(false);
+    if (event.target.value !== "") setChange(true);
+    setSearchField(event.target.value);
+  };
 
   useEffect(() => {
-    if(offset > 0)
-      dispatch(pokemonsAll(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`))
-    if(offset === 0 || offset < 0)
-      dispatch(pokemonsAll())
-  }, [offset])
+    dispatch(pokemonsAll());
+  }, []);
 
+  const filteredPokemons = pokemons?.filter((pokemon) =>
+    pokemon.name.toLowerCase().startsWith(searchField.toLowerCase())
+  );
 
-  return(
+  return (
     <div className="app-contaner">
-      <div className="pokemon-container">
-        <div className="all-container">
-          {
-            pokemons.map(pokemon => 
-              <PokemonCard key={pokemon.name} pokemon={pokemon} />
-            )
-          }
-        </div>
+      <div className="input-container">
+        <Input
+          className="input"
+          size="normal"
+          color="primary"
+          placeholder="search pokemons"
+          onChange={handleSearchChange}
+        />
+        <FilterAltIcon
+          className="filter"
+          sx={{ fontSize: 60 }}
+          onClick={() => handleClick()}
+        />
       </div>
-
-      <Stack style={{ paddingTop: '30px' }} spacing={2}>
-        <Pagination color="secondary" shape="rounded" count={10} onChange={handleChange} size="large" />
-      </Stack>
+      {showFilters ? (
+        <FilterOptions
+          handleChange={handleFilterChange}
+          resetFilter={resetFilter}
+        />
+      ) : null}
+      {filterChange ? (
+        <PokemonDisplay pokemons={realTypeFilterPokemons} filter />
+      ) : change ? (
+        <PokemonDisplay pokemons={filteredPokemons} filter />
+      ) : (
+        <PokemonDisplay pokemons={pokemons} />
+      )}
     </div>
-  )
-}
+  );
+};
 
-
-
-export default PokemonPreview ;
+export default PokemonPreview;

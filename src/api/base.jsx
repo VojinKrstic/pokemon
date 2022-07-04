@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseApiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
+const baseApiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
 
 const api = axios.create({
   baseURL: baseApiUrl,
