@@ -51,18 +51,14 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
           <FormControlLabel
             value={0}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="0-50"
+            label="asc"
           />
           <FormControlLabel
             value={1}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="50-70"
+            label="desc"
           />
-          <FormControlLabel
-            value={2}
-            control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="70-90"
-          />
+         
         </RadioGroup>
       </div>
       <div className="attack-container">
@@ -71,18 +67,14 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
           <FormControlLabel
             value={0}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="0-50"
+            label="asc"
           />
           <FormControlLabel
             value={1}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="50-70"
+            label="desc"
           />
-          <FormControlLabel
-            value={2}
-            control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="70-90"
-          />
+         
         </RadioGroup>
       </div>
       <div className="defense-container">
@@ -91,18 +83,14 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
           <FormControlLabel
             value={0}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="0-50"
+            label="asc"
           />
           <FormControlLabel
             value={1}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="50-70"
+            label="desc"
           />
-          <FormControlLabel
-            value={2}
-            control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="70-90"
-          />
+         
         </RadioGroup>
         <div className="reset-button">
           <Button onClick={resetFilter} variant="contained">
