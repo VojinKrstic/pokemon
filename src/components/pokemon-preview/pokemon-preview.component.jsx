@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Input } from "@mui/material";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import axios from "axios";
 
 import "./pokemon-preview.styles.scss";
 import { pokemonsAll } from "../../redux/pokemon/pokemons.slice";
-import axios from "axios";
 import FilterOptions from "../filter-options";
 import PokemonDisplay from "../pokemon-display";
 
@@ -36,19 +36,25 @@ const PokemonPreview = () => {
     }
     if (hp !== 0) {
       setTypeFilterPokemons(
-        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[0].base_stat > 50)
-      )
+        typeFilterPokemons?.filter(
+          (pokemon) => pokemon.pokemon.stats[0].base_stat > 50
+        )
+      );
       setFilterChange(true);
     }
     if (atk !== 0) {
       setTypeFilterPokemons(
-        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[1].base_stat > 50)
+        typeFilterPokemons?.filter(
+          (pokemon) => pokemon.pokemon.stats[1].base_stat > 50
+        )
       );
       setFilterChange(true);
     }
     if (def !== 0) {
       setTypeFilterPokemons(
-        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[2].base_stat > 50)
+        typeFilterPokemons?.filter(
+          (pokemon) => pokemon.pokemon.stats[2].base_stat > 50
+        )
       );
       setFilterChange(true);
     }

@@ -18,7 +18,7 @@ const PokemonDetails = ({ url }) => {
     fetchDetails();
   }, []);
 
-  return (  
+  return (
     <div className={`${details?.types[0].type.name} thumb-container`}>
       <div className="detail-wrapper">
         <Link className="link" to={`/${details?.name}`}>

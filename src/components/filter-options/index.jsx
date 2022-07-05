@@ -87,7 +87,7 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
       </div>
       <div className="defense-container">
         <p>Defense</p>
-        <RadioGroup name="radio-buttons-group" className="defense-container" onChange={(event) => setDefFilter(event.target.value)}>
+        <RadioGroup name="radio-buttons-group" className="defense-values" onChange={(event) => setDefFilter(event.target.value)}>
           <FormControlLabel
             value={0}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
