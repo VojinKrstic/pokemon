@@ -27,10 +27,12 @@ const PokemonAllDetails = () => {
 
   useEffect(() => {
     fetchDetails();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonName]);
 
   useEffect(() => {
     fetchDetails();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (

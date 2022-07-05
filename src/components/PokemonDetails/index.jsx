@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
 import './PokemonDetails.styles.scss'
 
-const PokemonDetails = ({ url }) => {
+const PokemonDetails = ({ name }) => {
   const [details, setDetails] = useState(null);
 
   const fetchDetails = async () => {
-    const response = await axios.get(url);
+    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
     if (response.status === 200) {
       setDetails(await response.data);
     }
@@ -16,6 +15,7 @@ const PokemonDetails = ({ url }) => {
 
   useEffect(() => {
     fetchDetails();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (  

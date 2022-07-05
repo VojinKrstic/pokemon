@@ -7,11 +7,11 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
 import "./pokemon-preview.styles.scss";
 import { pokemonsAll } from "../../redux/pokemon/pokemons.slice";
-import axios from "axios";
 import FilterOptions from "../filter-options";
 import PokemonDisplay from "../pokemon-display";
 
-const PokemonPreview = () => {
+const PokemonPreview = ({ pokemonDetails }) => {
+  console.log(pokemonDetails);
   const pokemons = useSelector((state) => state.pokemons);
   const dispatch = useDispatch();
   const [searchField, setSearchField] = useState("");
@@ -24,39 +24,30 @@ const PokemonPreview = () => {
     setShowFilters(!showFilters);
   };
 
-  const handleFilterChange = async (type, hp, atk, def) => {
+  const handleFilterChange = (type, hp, atk, def) => {
     if (type !== "") {
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/type/${type}`
+      setTypeFilterPokemons(
+        pokemonDetails?.filter(
+          (pokemon) => pokemon?.types[0].type.name === type
+        )
       );
-      if (response.status === 200) {
-        setTypeFilterPokemons(response.data.pokemon);
-        setFilterChange(true);
-      }
+      setFilterChange(true);
     }
     if (hp !== 0) {
-      setTypeFilterPokemons(
-        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[0].base_stat > 50)
-      )
-      setFilterChange(true);
+      if(hp===0){
+        
+      }
+      if(hp===1){
+
+      }
     }
     if (atk !== 0) {
-      setTypeFilterPokemons(
-        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[1].base_stat > 50)
-      );
-      setFilterChange(true);
+      
     }
     if (def !== 0) {
-      setTypeFilterPokemons(
-        typeFilterPokemons?.filter((pokemon) => pokemon.pokemon.stats[2].base_stat > 50)
-      );
-      setFilterChange(true);
+      
     }
   };
-
-  const realTypeFilterPokemons = typeFilterPokemons?.map(
-    (pokemon) => pokemon.pokemon
-  );
 
   const resetFilter = () => {
     setFilterChange(false);
@@ -71,6 +62,7 @@ const PokemonPreview = () => {
 
   useEffect(() => {
     dispatch(pokemonsAll());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filteredPokemons = pokemons?.filter((pokemon) =>
@@ -100,7 +92,7 @@ const PokemonPreview = () => {
         />
       ) : null}
       {filterChange ? (
-        <PokemonDisplay pokemons={realTypeFilterPokemons} filter />
+        <PokemonDisplay pokemons={typeFilterPokemons} filter />
       ) : change ? (
         <PokemonDisplay pokemons={filteredPokemons} filter />
       ) : (

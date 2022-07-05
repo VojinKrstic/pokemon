@@ -4,7 +4,7 @@ import './pokemon-card.styles.scss'
 
 const PokemonCard = ({pokemon}) => {
   return (
-    <PokemonDetails key={pokemon.name} url={pokemon.url} />
+    <PokemonDetails key={pokemon.name} name={pokemon.name} />
   );
 }
 export default PokemonCard
