@@ -9,13 +9,14 @@ import "./deck-page.styles.scss";
 const DeckPage = () => {
   const deck = useSelector((state) => state.deckList);
   const dispatch = useDispatch();
+  console.log(deck)
   return (
     <div className="deck">
-      {deck.map((pokemon) => (
+      {deck.map((pokemon, index) => (
         <div>
           <PokemonDetails
-            key={pokemon.name}
-            url={`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`}
+            key={index}
+            name={pokemon.name}
           />
           <Button
             variant="contained"

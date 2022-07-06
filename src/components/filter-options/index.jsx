@@ -7,10 +7,10 @@ import axios from "axios";
 
 const FilterOptions = ({ handleChange, resetFilter }) => {
   const [types, setTypes] = useState([]);
-  const [typeFilter, setTypeFilter] = useState('')
-  const [hpFilter, setHpFilter] = useState(0)
-  const [atkFilter, setAtkFilter] = useState(0)
-  const [defFilter, setDefFilter] = useState(0)
+  const [typeFilter, setTypeFilter] = useState("");
+  const [hpFilter, setHpFilter] = useState(-1);
+  const [atkFilter, setAtkFilter] = useState(-1);
+  const [defFilter, setDefFilter] = useState(-1);
 
   const getAllTypes = async () => {
     const response = await axios.get(`https://pokeapi.co/api/v2/type`);
@@ -19,7 +19,7 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
     }
   };
 
-  console.log(typeFilter, hpFilter, atkFilter, defFilter)
+  console.log(typeFilter, hpFilter, atkFilter, defFilter);
 
   useEffect(() => {
     getAllTypes();
@@ -47,7 +47,11 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
       </div>
       <div className="hp-container">
         <p>Health points</p>
-        <RadioGroup name="radio-buttons-group" className="types" onChange={(event) => setHpFilter(event.target.value)}>
+        <RadioGroup
+          name="radio-buttons-group"
+          className="types"
+          onChange={(event) => setHpFilter(event.target.value)}
+        >
           <FormControlLabel
             value={0}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
@@ -58,12 +62,15 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
             label="desc"
           />
-         
         </RadioGroup>
       </div>
       <div className="attack-container">
         <p>Attack</p>
-        <RadioGroup name="radio-buttons-group" className="types" onChange={(event) => setAtkFilter(event.target.value)}>
+        <RadioGroup
+          name="radio-buttons-group"
+          className="types"
+          onChange={(event) => setAtkFilter(event.target.value)}
+        >
           <FormControlLabel
             value={0}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
@@ -74,12 +81,15 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
             label="desc"
           />
-         
         </RadioGroup>
       </div>
       <div className="defense-container">
         <p>Defense</p>
-        <RadioGroup name="radio-buttons-group" className="defense-values" onChange={(event) => setDefFilter(event.target.value)}>
+        <RadioGroup
+          name="radio-buttons-group"
+          className="defense-values"
+          onChange={(event) => setDefFilter(event.target.value)}
+        >
           <FormControlLabel
             value={0}
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
@@ -90,13 +100,18 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
             control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
             label="desc"
           />
-         
         </RadioGroup>
         <div className="reset-button">
-          <Button onClick={resetFilter} variant="contained">
+          <Button size="small" onClick={resetFilter} variant="contained">
             Reset filters
           </Button>
-          <Button onClick={() => handleChange(typeFilter, hpFilter, atkFilter, defFilter)} variant="contained">
+          <Button
+            size="small"
+            onClick={() =>
+              handleChange(typeFilter, hpFilter, atkFilter, defFilter)
+            }
+            variant="contained"
+          >
             Apply filters
           </Button>
         </div>

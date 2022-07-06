@@ -4,12 +4,7 @@ import { Link } from "react-router-dom";
 
 import { ReactComponent as DeckLogo } from '../../assets/deck-icon.svg'
 
-
 import './header.styles.scss'
-
-
-
-
 
 const Header = () => {
 
