@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/pokemon/static/css/main.7cc4d4f8.css",
+    "main.js": "/pokemon/static/js/main.3977391e.js",
+    "static/js/787.ab378faf.chunk.js": "/pokemon/static/js/787.ab378faf.chunk.js",
+    "static/media/pokemon-background.jpg": "/pokemon/static/media/pokemon-background.1b19f4f17690b7268826.jpg",
+    "static/media/deck-icon.svg": "/pokemon/static/media/deck-icon.4e685e04496fa8fed083e4eeb53816f4.svg",
+    "index.html": "/pokemon/index.html",
+    "main.7cc4d4f8.css.map": "/pokemon/static/css/main.7cc4d4f8.css.map",
+    "main.3977391e.js.map": "/pokemon/static/js/main.3977391e.js.map",
+    "787.ab378faf.chunk.js.map": "/pokemon/static/js/787.ab378faf.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7cc4d4f8.css",
+    "static/js/main.3977391e.js"
+  ]
+}
