@@ -11,6 +11,10 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
   const [hpFilter, setHpFilter] = useState(-1);
   const [atkFilter, setAtkFilter] = useState(-1);
   const [defFilter, setDefFilter] = useState(-1);
+  const [disabledP, setDisabledP] = useState(false);
+  const [disabledH, setDisabledH] = useState(false);
+  const [disabledA, setDisabledA] = useState(false);
+  const [disabledD, setDisabledD] = useState(false);
 
   const getAllTypes = async () => {
     const response = await axios.get(`https://pokeapi.co/api/v2/type`);
@@ -19,11 +23,11 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
     }
   };
 
-  console.log(typeFilter, hpFilter, atkFilter, defFilter);
+  
 
   useEffect(() => {
     getAllTypes();
-  }, []);
+  }, [types]);
 
   return (
     <div className="filter-container">
@@ -34,11 +38,26 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
             <FormControlLabel
               key={type.name}
               control={
-                <Radio
+                (disabledH || disabledA || disabledD) ? (
+                  <Radio
+                  disabled
                   value={type.name}
                   sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                  onChange={(event) => setTypeFilter(event.target.value)}
+                  onChange={(event) => {
+                    setTypeFilter(event.target.value);
+                    setDisabledP(true);
+                  }}
                 />
+                ) : (
+                  <Radio
+                  value={type.name}
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+                  onChange={(event) => {
+                    setTypeFilter(event.target.value);
+                    setDisabledP(true);
+                  }}
+                />
+                )
               }
               label={type.name}
             />
@@ -47,29 +66,81 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
       </div>
       <div className="hp-container">
         <p>Health points</p>
-        <RadioGroup
-          name="radio-buttons-group"
-          className="types"
-          onChange={(event) => setHpFilter(event.target.value)}
-        >
-          <FormControlLabel
-            value={0}
-            control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="asc"
-          />
-          <FormControlLabel
-            value={1}
-            control={<Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
-            label="desc"
-          />
-        </RadioGroup>
+        {(disabledP || disabledA || disabledD) ? (
+          <RadioGroup
+            name="radio-buttons-group"
+            className="types"
+            onChange={(event) => {setHpFilter(event.target.value); setDisabledH(true)}}
+          >
+            <FormControlLabel
+              value={0}
+              control={
+                <Radio
+                  disabled
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+                />
+              }
+              label="asc"
+            />
+            <FormControlLabel
+              value={1}
+              control={
+                <Radio
+                  disabled
+                  sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+                />
+              }
+              label="desc"
+            />
+          </RadioGroup>
+        ) : (
+          <RadioGroup
+            name="radio-buttons-group"
+            className="types"
+            onChange={(event) => {setHpFilter(event.target.value); setDisabledH(true)}}
+          >
+            <FormControlLabel
+              value={0}
+              control={
+                <Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />
+              }
+              label="asc"
+            />
+            <FormControlLabel
+              value={1}
+              control={
+                <Radio sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />
+              }
+              label="desc"
+            />
+          </RadioGroup>
+        )}
       </div>
+
       <div className="attack-container">
         <p>Attack</p>
-        <RadioGroup
+        {(disabledH || disabledP || disabledD) ? (
+          <RadioGroup
           name="radio-buttons-group"
           className="types"
-          onChange={(event) => setAtkFilter(event.target.value)}
+          onChange={(event) => {setAtkFilter(event.target.value); setDisabledA(true)}}
+        >
+          <FormControlLabel
+            value={0}
+            control={<Radio disabled sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
+            label="asc"
+          />
+          <FormControlLabel
+            value={1}
+            control={<Radio disabled sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
+            label="desc"
+          />
+        </RadioGroup>
+        ) : (
+          <RadioGroup
+          name="radio-buttons-group"
+          className="types"
+          onChange={(event) => {setAtkFilter(event.target.value); setDisabledA(true)}}
         >
           <FormControlLabel
             value={0}
@@ -82,13 +153,33 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
             label="desc"
           />
         </RadioGroup>
+        )}
+        
       </div>
       <div className="defense-container">
         <p>Defense</p>
-        <RadioGroup
+        {(disabledH || disabledA || disabledP) ? (
+          <RadioGroup
           name="radio-buttons-group"
           className="defense-values"
-          onChange={(event) => setDefFilter(event.target.value)}
+          onChange={(event) => {setDefFilter(event.target.value); setDisabledD(true)}}
+        >
+          <FormControlLabel
+            value={0}
+            control={<Radio disabled sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
+            label="asc"
+          />
+          <FormControlLabel
+            value={1}
+            control={<Radio disabled sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }} />}
+            label="desc"
+          />
+        </RadioGroup>
+        ) : (
+          <RadioGroup
+          name="radio-buttons-group"
+          className="defense-values"
+          onChange={(event) => {setDefFilter(event.target.value); setDisabledD(true)}}
         >
           <FormControlLabel
             value={0}
@@ -101,6 +192,8 @@ const FilterOptions = ({ handleChange, resetFilter }) => {
             label="desc"
           />
         </RadioGroup>
+        )}
+        
         <div className="reset-button">
           <Button size="small" onClick={resetFilter} variant="contained">
             Reset filters

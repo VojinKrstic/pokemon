@@ -24,6 +24,7 @@ const PokemonPreview = ({ pokemonDetails }) => {
   };
 
   const handleFilterChange = (type, hp, atk, def) => {
+    setTypeFilterPokemons([]);
     if (type !== "") {
       setTypeFilterPokemons(
         pokemonDetails
@@ -33,30 +34,32 @@ const PokemonPreview = ({ pokemonDetails }) => {
       setFilterChange(true);
     }
     if (hp !== -1) {
+      setFilterChange(false);
       if (hp === "0") {
         //asc
         setTypeFilterPokemons(
-          pokemonDetails?.sort(
+          pokemonDetails?.slice(0).sort(
             (a, b) => a.stats[0].base_stat - b.stats[0].base_stat
           )
         );
-        setFilterChange(true);
+        
       }
       if (hp === "1") {
         //desc
         setTypeFilterPokemons(
-          pokemonDetails?.sort(
+          pokemonDetails?.slice(0).sort(
             (a, b) => b.stats[0].base_stat - a.stats[0].base_stat
           )
         );
-        setFilterChange(true);
       }
+      setFilterChange(true);
+      console.log(typeFilterPokemons)
     }
     if (atk !== -1) {
       if (atk === "0") {
         //asc
         setTypeFilterPokemons(
-          pokemonDetails?.sort(
+          pokemonDetails?.slice(0).sort(
             (a, b) => a.stats[1].base_stat - b.stats[1].base_stat
           )
         );
@@ -65,7 +68,7 @@ const PokemonPreview = ({ pokemonDetails }) => {
       if (atk === "1") {
         //desc
         setTypeFilterPokemons(
-          pokemonDetails?.sort(
+          pokemonDetails?.slice(0).sort(
             (a, b) => b.stats[1].base_stat - a.stats[1].base_stat
           )
         );
@@ -76,7 +79,7 @@ const PokemonPreview = ({ pokemonDetails }) => {
       if (def === "0") {
         //asc
         setTypeFilterPokemons(
-          pokemonDetails?.sort(
+          pokemonDetails?.slice(0).sort(
             (a, b) => a.stats[2].base_stat - b.stats[2].base_stat
           )
         );
@@ -85,7 +88,7 @@ const PokemonPreview = ({ pokemonDetails }) => {
       if (def === "1") {
         //desc
         setTypeFilterPokemons(
-          pokemonDetails?.sort(
+          pokemonDetails?.slice(0).sort(
             (a, b) => b.stats[2].base_stat - a.stats[2].base_stat
           )
         );
@@ -111,6 +114,7 @@ const PokemonPreview = ({ pokemonDetails }) => {
     setTypeFilterPokemons([])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   const filteredPokemons = pokemons?.filter((pokemon) =>
     pokemon.name.toLowerCase().startsWith(searchField.toLowerCase())
